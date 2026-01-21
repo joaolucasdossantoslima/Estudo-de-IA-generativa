@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Bhaskara do D</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .passo { background: #f4f4f4; padding: 10px; margin: 5px 0; border-left: 4px solid #2196F3; }
+        input { width: 60px; padding: 5px; margin: 5px; }
+        button { padding: 8px 15px; cursor: pointer; background: #2196F3; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h2>Calculadora de Bhaskara - GE</h2>
+    <p>Insira os coeficientes da equação:</p>
+    
+    <input type="number" id="a" placeholder="a"> x² + 
+    <input type="number" id="b" placeholder="b"> x + 
+    <input type="number" id="c" placeholder="c"> = 0
+    <br><br>
+    <button onclick="calcularBhaskara()">Calcular e Ver Passo a Passo</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularBhaskara() {
+            // 1. Captura os valores e converte para números decimais (float)
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+            const divResultado = document.getElementById('resultado');
+            
+            // Limpa o resultado anterior
+            divResultado.innerHTML = "";
+
+            // Revisão de erro: Verificar se "a" é zero (não seria equação de 2º grau)
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                divResultado.innerHTML = "<p style='color:red'>Por favor, preencha todos os campos.</p>";
+                return;
+            }
+            if (a === 0) {
+                divResultado.innerHTML = "<p style='color:red'>O valor de 'a' não pode ser 0 em uma equação de 2º grau.</p>";
+                return;
+            }
+
+            // PASSO 1: Calcular o Delta (Δ = b² - 4ac)
+            const delta = (b * b) - (4 * a * c);
+            
+            let html = "<h3>Passo a Passo:</h3>";
+            html += `<div class='passo'><strong>1. Delta (Δ):</strong> Δ = (${b})² - 4 * ${a} * ${c} <br> Δ = ${delta}</div>`;
+
+            // PASSO 2: Verificar se existem raízes reais
+            if (delta < 0) {
+                html += `<div class='passo' style='color:orange'>O Delta é negativo (${delta}), portanto a equação não possui raízes reais.</div>`;
+            } else {
+                // PASSO 3: Calcular as raízes usando Bhaskara
+                const raizDelta = Math.sqrt(delta);
+                const x1 = (-b + raizDelta) / (2 * a);
+                const x2 = (-b - raizDelta) / (2 * a);
+
+                html += `<div class='passo'><strong>2. Raiz de Delta:</strong> √${delta} ≈ ${raizDelta.toFixed(2)}</div>`;
+                html += `<div class='passo'><strong>3. Bhaskara:</strong> x = (-(${b}) ± ${raizDelta.toFixed(2)}) / (2 * ${a})</div>`;
+                
+                html += "<h3>Resultado Final:</h3>";
+                html += `<p><strong>x1 =</strong> ${x1.toFixed(2)}</p>`;
+                html += `<p><strong>x2 =</strong> ${x2.toFixed(2)}</p>`;
+            }
+
+            divResultado.innerHTML = html;
+        }
+    </script>
+
+</body>
+</html>

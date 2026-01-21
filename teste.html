@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="Email"></label>
+        <input id="email" type="email">
+    </form>
+<h2>Crie sua Senha</h2>
+    <p>A senha deve conter obrigatoriamente: <br>
+       ✅ No mínimo 6 caracteres <br>
+       ✅ 1 letra maiúscula <br>
+       ✅ 1 número <br>
+       ✅ 1 símbolo (!@#$%^&* etc.)</p>
+
+    <input type="password" id="campoSenha" placeholder="Digite sua senha">
+    <button onclick="verificar()">Verificar</button>
+
+    <p id="mensagem"></p>
+</body>
+<script>
+     function validarEmail(email) {
+  // O padrão Regex para uma validação básica e funcional
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (regex.test(email)) {
+    return "E-mail válido! ✅";
+  } else {
+    return "E-mail inválido. Verifique o '@' e a pontuação. ❌";
+  }
+}
+function verificar() {
+            // Pegamos o valor digitado no campo e o local da mensagem
+            const senha = document.getElementById("campoSenha").value;
+            const mensagem = document.getElementById("mensagem");
+
+            // Regras (Expressões Regulares)
+            const temMinimo6 = senha.length >= 6;
+            const temMaiuscula = /[A-Z]/.test(senha);
+            const temNumero = /[0-9]/.test(senha);
+            const temSimbolo = /[!@#$%^&*(),.?":{}|<>]/.test(senha);
+
+            // Teste lógico: Todas as condições precisam ser verdadeiras (usando o operador &&)
+            if (temMinimo6 && temMaiuscula && temNumero && temSimbolo) {
+                mensagem.innerText = "Senha válida! Parabéns, D.";
+                mensagem.style.color = "green";
+            } else {
+                mensagem.innerText = "Senha inválida. Verifique os requisitos acima.";
+                mensagem.style.color = "red";
+            }
+        }
+    </script>
+    </script>
+</html>
