@@ -67,11 +67,11 @@ def responder_mensagem():
                 # ESTADO 0: Manda apenas a Saudação com Menu em UMA bolha
                 if estado_conversa == 0:
                     menu_inicial = (
-                        "Olá! Eu sou Zar o assistente de montagem de computador.\n\n"
+                        "Olá! Eu sou Zar o assistente de montagem de computador."
                         "Como posso ajudar?\n"
-                        "1. Montar do zero\n"
-                        "2. Peças específicas\n"
-                        "3. Dúvidas"
+                        "1. Montar do zero   "
+                        "2. Peças específicas   "
+                        "3. Dúvidas   " 
                     )
                     enviar_mensagem(menu_inicial)
                     estado_conversa = 1
@@ -80,18 +80,18 @@ def responder_mensagem():
                 elif estado_conversa == 1:
                     if texto_recebido == "1":
                         menu_uso = (
-                            "Ótima escolha! Qual será o uso do PC?\n\n"
-                            "• Escritório\n• Trabalho\n• Estudo\n• Jogos\n\n"
+                            "Ótima escolha! Qual será o uso do PC?\n"
+                            "• Escritório  • Trabalho  • Estudo  • Jogos\n"
                             "*(Digite uma das opções acima ou 'Menu Inicial')*"
                         )
                         enviar_mensagem(menu_uso)
                         estado_conversa = 2
                     elif texto_recebido == "2":
                         menu_pecas = (
-                            "De qual peça você está procurando informações?\n\n"
-                            "• Fonte\n• Memória RAM\n• Armazenamento\n"
-                            "• Processador\n• Placa de Vídeo\n• Coolers\n"
-                            "• Periféricos\n\n"
+                            "De qual peça você está procurando informações?\n"
+                            "• Fonte  • Memória RAM  • Armazenamento  "
+                            "• Processador  • Placa de Vídeo  • Coolers  "
+                            "• Periféricos\n"
                             "*(Digite o nome da peça ou 'Menu Inicial')*"
                         )
                         enviar_mensagem(menu_pecas)
@@ -129,4 +129,9 @@ def responder_mensagem():
 # Loop principal
 while True:
     responder_mensagem()
+    time.sleep(2)
+# Loop principal
+while True:
+    responder_mensagem()
+
     time.sleep(2)
